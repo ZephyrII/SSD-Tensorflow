@@ -67,7 +67,7 @@ SAMPLES_PER_FILES = 50
 
 MY_LABELS = {
     'none': (0, 'Background'),
-    'charger': (1, 'Item'),
+    # 'charger': (1, 'Item'),
 }
 
 def _process_image(directory, name):
@@ -190,13 +190,15 @@ def _get_output_filename(output_dir, name, idx):
         return '%s/%s_train_%03d.tfrecord' % (output_dir, name, idx)
 
 
-def run(dataset_dir, output_dir, name='train', shuffling=False):
+def run(dataset_dir, output_dir, category_name, name='train', shuffling=False):
     """Runs the conversion operation.
 
     Args:
       dataset_dir: The dataset directory where the dataset is stored.
       output_dir: Output directory.
     """
+    MY_LABELS[category_name] = (1, "Item")
+
     NUM_TRAIN_SAMPLES = 0
     NUM_TEST_SAMPLES = 0
     if not tf.gfile.Exists(dataset_dir):
