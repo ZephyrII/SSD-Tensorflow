@@ -18,21 +18,21 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from datasets import cifar10, racoon, queen, charger
+from datasets import mydataset_single
 from datasets import imagenet
 
 from datasets import pascalvoc_2007
 from datasets import pascalvoc_2012
 
-datasets_map = {
-    'cifar10': cifar10,
-    'imagenet': imagenet,
-    'pascalvoc_2007': pascalvoc_2007,
-    'pascalvoc_2012': pascalvoc_2012,
-    'racoon': racoon,
-    'queen': queen,
-    'charger': charger,
-}
+# datasets_map = {
+#     'cifar10': cifar10,
+#     'imagenet': imagenet,
+#     'pascalvoc_2007': pascalvoc_2007,
+#     'pascalvoc_2012': pascalvoc_2012,
+#     'racoon': racoon,
+#     'queen': queen,
+#     'charger': charger,
+# }
 
 
 def get_dataset(name, split_name, dataset_dir, file_pattern=None, reader=None):
@@ -50,11 +50,11 @@ def get_dataset(name, split_name, dataset_dir, file_pattern=None, reader=None):
     Raises:
         ValueError: If the dataset `name` is unknown.
     """
-    if name not in datasets_map:
-        raise ValueError('Name of dataset unknown %s' % name)
+    # if name not in datasets_map:
+    #     raise ValueError('Name of dataset unknown %s' % name)
 
     FILE_PATTERN = name+'_%s_*.tfrecord'
-    return datasets_map[name].get_split(split_name,
+    return mydataset_single.get_split(split_name,
                                         dataset_dir,
                                         FILE_PATTERN,
                                         reader)
