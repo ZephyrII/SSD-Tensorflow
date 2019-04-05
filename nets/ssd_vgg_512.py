@@ -73,6 +73,7 @@ class SSDNet(object):
       conv12 ==> 1 x 1
     The default image size used to train this network is 512x512.
     """
+    anchor_scale = 1.0
     default_params = SSDParams(
         img_shape=(512, 512),
         num_classes=21,
@@ -80,14 +81,20 @@ class SSDNet(object):
         feat_layers=['block3', 'block4', 'block7', 'block8', 'block9', 'block10', 'block11'],
         feat_shapes=[(128, 128), (64, 64), (32, 32), (16, 16), (8, 8), (4, 4), (2, 2)],
         anchor_size_bounds=[0.10, 0.90],
-        anchor_sizes=[(3.28, 20.48),
-                      (20.48, 51.2),
-                      (51.2, 133.12),
-                      (133.12, 215.04),
-                      (215.04, 296.96),
-                      (296.96, 378.88),
-                      (378.88, 460.8),
-                      (460.8, 542.72)],
+        # anchor_sizes=[(20.48, 51.2),
+        #               (51.2, 133.12),
+        #               (133.12, 215.04),
+        #               (215.04, 296.96),
+        #               (296.96, 378.88),
+        #               (378.88, 460.8),
+        #               (460.8, 542.72)],
+        anchor_sizes=[(20.48*anchor_scale, 51.2*anchor_scale),
+                      (51.2*anchor_scale, 133.12*anchor_scale),
+                      (133.12*anchor_scale, 215.04*anchor_scale),
+                      (215.04*anchor_scale, 296.96*anchor_scale),
+                      (296.96*anchor_scale, 378.88*anchor_scale),
+                      (378.88*anchor_scale, 460.8*anchor_scale),
+                      (460.8*anchor_scale, 542.72*anchor_scale)],
         anchor_ratios=[[2, .5],
                        [2, .5, 3, 1./3],
                        [2, .5, 3, 1./3],
